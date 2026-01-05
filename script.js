@@ -73,7 +73,7 @@ function shareKakao() {
             objectType: 'feed',
             content: {
                 title: '최혜환 ♥ 박희진 결혼합니다',
-                description: '2026년 9월 19일 (금) 오후 1시',
+                description: '2026년 9월 19일 (토) 오후 1시',
                 imageUrl: 'https://your-image-url.com/main.jpg',
                 link: {
                     mobileWebUrl: window.location.href,
@@ -92,7 +92,7 @@ function shareKakao() {
         });
     } else {
         // 카카오톡 SDK가 없으면 URL 공유
-        const message = '최혜환 ♥ 박희진 결혼합니다\n2026년 9월 19일 (금) 오후 1시\n\n' + window.location.href;
+        const message = '최혜환 ♥ 박희진 결혼합니다\n2026년 9월 19일 (토) 오후 1시\n\n' + window.location.href;
         if (navigator.share) {
             navigator.share({
                 title: '최혜환 ♥ 박희진 결혼식 초대장',
