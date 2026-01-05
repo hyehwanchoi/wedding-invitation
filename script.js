@@ -72,7 +72,7 @@ function shareKakao() {
         Kakao.Share.sendDefault({
             objectType: 'feed',
             content: {
-                title: 'OOO ♥ OOO 결혼합니다',
+                title: '최혜환 ♥ 박희진 결혼합니다',
                 description: '2025년 00월 00일 (토) 오후 2시',
                 imageUrl: 'https://your-image-url.com/main.jpg',
                 link: {
@@ -92,10 +92,10 @@ function shareKakao() {
         });
     } else {
         // 카카오톡 SDK가 없으면 URL 공유
-        const message = 'OOO ♥ OOO 결혼합니다\n2025년 00월 00일 (토) 오후 2시\n\n' + window.location.href;
+        const message = '최혜환 ♥ 박희진 결혼합니다\n2025년 00월 00일 (토) 오후 2시\n\n' + window.location.href;
         if (navigator.share) {
             navigator.share({
-                title: 'OOO ♥ OOO 결혼식 초대장',
+                title: '최혜환 ♥ 박희진 결혼식 초대장',
                 text: message,
                 url: window.location.href
             });
