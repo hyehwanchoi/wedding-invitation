@@ -117,30 +117,19 @@ section h3 {
 }
 
 /* 신랑신부 정보 */
-.couple-info .container {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-.couple-info .groom,
-.couple-info .bride {
-    padding: 30px;
-    background-color: var(--secondary-color);
-    border-radius: 15px;
-}
-
-.couple-info .name {
+.couple-info .couple-names {
     font-size: 24px;
-    margin: 10px 0;
+    margin: 20px 0 30px;
     color: var(--primary-color);
     font-weight: 500;
 }
 
-.couple-info .parents {
-    font-size: 14px;
-    color: var(--light-text);
-    margin-bottom: 20px;
+.couple-info .contact-buttons-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 300px;
+    margin: 0 auto;
 }
 
 /* 버튼 */
@@ -471,6 +460,44 @@ section h3 {
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+/* 이미지 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: contain;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: #bbb;
 }
 
 /* 스크롤 애니메이션 */

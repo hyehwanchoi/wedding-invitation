@@ -1,6 +1,6 @@
 // ==================== 설정 ====================
 // 결혼식 날짜 설정 (YYYY, MM-1, DD)
-const weddingDate = new Date(2025, 0, 1); // 2025년 1월 1일 (월은 0부터 시작)
+const weddingDate = new Date(2025, 8, 19); // 2025년 9월 19일 (월은 0부터 시작)
 
 // ==================== D-Day 계산 ====================
 function updateDday() {
@@ -73,7 +73,7 @@ function shareKakao() {
             objectType: 'feed',
             content: {
                 title: '최혜환 ♥ 박희진 결혼합니다',
-                description: '2025년 00월 00일 (토) 오후 2시',
+                description: '2025년 9월 19일 (금) 오후 1시',
                 imageUrl: 'https://your-image-url.com/main.jpg',
                 link: {
                     mobileWebUrl: window.location.href,
@@ -92,7 +92,7 @@ function shareKakao() {
         });
     } else {
         // 카카오톡 SDK가 없으면 URL 공유
-        const message = '최혜환 ♥ 박희진 결혼합니다\n2025년 00월 00일 (토) 오후 2시\n\n' + window.location.href;
+        const message = '최혜환 ♥ 박희진 결혼합니다\n2025년 9월 19일 (금) 오후 1시\n\n' + window.location.href;
         if (navigator.share) {
             navigator.share({
                 title: '최혜환 ♥ 박희진 결혼식 초대장',
@@ -198,15 +198,31 @@ function escapeHtml(text) {
 }
 
 // ==================== 갤러리 모달 ====================
-// 갤러리 이미지 클릭 시 크게 보기 (선택사항)
+// 갤러리 이미지 클릭 시 크게 보기
 document.addEventListener('DOMContentLoaded', function() {
-    const galleryItems = document.querySelectorAll('.gallery-item');
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-image');
+    const closeBtn = document.querySelector('.modal-close');
+    const galleryItems = document.querySelectorAll('.gallery-item img');
 
-    galleryItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // 여기에 이미지 모달 기능 추가 가능
-            alert('갤러리 기능은 이미지를 추가한 후 활성화됩니다.');
+    // 갤러리 이미지 클릭 시 모달 열기
+    galleryItems.forEach(img => {
+        img.addEventListener('click', function() {
+            modal.style.display = 'block';
+            modalImg.src = this.src;
         });
+    });
+
+    // 닫기 버튼 클릭 시 모달 닫기
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+
+    // 모달 배경 클릭 시 닫기
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
     });
 });
 
