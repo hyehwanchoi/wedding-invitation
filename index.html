@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OOO ♥ OOO 결혼합니다">
+    <title>OOO ♥ OOO 결혼식 초대장</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 메인 헤더 -->
+    <header class="main-header">
+        <div class="container">
+            <h1 class="names">OOO <span class="heart">♥</span> OOO</h1>
+            <p class="subtitle">결혼합니다</p>
+        </div>
+    </header>
+
+    <!-- 메인 이미지 -->
+    <section class="hero">
+        <div class="hero-image">
+            <!-- 메인 사진을 여기에 추가하세요 -->
+            <div class="placeholder-image">📷 메인 사진</div>
+        </div>
+    </section>
+
+    <!-- 인사말 -->
+    <section class="greeting">
+        <div class="container">
+            <h2>초대합니다</h2>
+            <p class="message">
+                평생을 함께 걸어갈<br>
+                소중한 인연을 만났습니다.<br>
+                <br>
+                저희 두 사람이 사랑과 믿음으로<br>
+                한 가정을 이루는 자리에<br>
+                오셔서 축복해 주시면<br>
+                더없는 기쁨으로 간직하겠습니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- 신랑신부 정보 -->
+    <section class="couple-info">
+        <div class="container">
+            <div class="groom">
+                <h3>신랑</h3>
+                <p class="name">OOO</p>
+                <p class="parents">아버지 OOO · 어머니 OOO의 장남</p>
+                <div class="contact-buttons">
+                    <a href="tel:010-0000-0000" class="btn">📞 신랑에게 연락하기</a>
+                </div>
+            </div>
+
+            <div class="bride">
+                <h3>신부</h3>
+                <p class="name">OOO</p>
+                <p class="parents">아버지 OOO · 어머니 OOO의 장녀</p>
+                <div class="contact-buttons">
+                    <a href="tel:010-0000-0000" class="btn">📞 신부에게 연락하기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 예식 일시 및 장소 -->
+    <section class="wedding-info">
+        <div class="container">
+            <h2>예식 일시 및 장소</h2>
+            <div class="info-box">
+                <p class="date">2025년 00월 00일 (토) 오후 2시</p>
+                <p class="location">OO웨딩홀 OO층 OO홀</p>
+                <p class="address">서울특별시 OO구 OO동 000-00</p>
+            </div>
+
+            <!-- D-Day 카운터 -->
+            <div class="dday">
+                <p>결혼식까지 <span id="dday-count">D-00</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 갤러리 -->
+    <section class="gallery">
+        <div class="container">
+            <h2>갤러리</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">📷</div>
+                <div class="gallery-item">📷</div>
+                <div class="gallery-item">📷</div>
+                <div class="gallery-item">📷</div>
+                <div class="gallery-item">📷</div>
+                <div class="gallery-item">📷</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 오시는 길 -->
+    <section class="location-map">
+        <div class="container">
+            <h2>오시는 길</h2>
+
+            <!-- 카카오맵 -->
+            <div id="map" class="map-container">
+                <p class="map-placeholder">📍 지도가 여기에 표시됩니다</p>
+            </div>
+
+            <!-- 교통 정보 -->
+            <div class="traffic-info">
+                <h3>🚇 지하철</h3>
+                <p>0호선 OO역 0번 출구 도보 5분</p>
+
+                <h3>🚌 버스</h3>
+                <p>간선: 000, 000, 000<br>
+                   지선: 0000, 0000</p>
+
+                <h3>🚗 자가용</h3>
+                <p>건물 내 주차 가능 (2시간 무료)</p>
+            </div>
+
+            <a href="https://map.kakao.com/" target="_blank" class="btn btn-primary">카카오맵으로 보기</a>
+        </div>
+    </section>
+
+    <!-- 마음 전하실 곳 -->
+    <section class="account">
+        <div class="container">
+            <h2>마음 전하실 곳</h2>
+            <p class="account-desc">참석이 어려우신 분들을 위해<br>계좌번호를 안내드립니다.</p>
+
+            <div class="account-box">
+                <h3>신랑측</h3>
+                <div class="account-item">
+                    <p><strong>신랑</strong> OOO</p>
+                    <p>OO은행 000-0000-0000-00</p>
+                    <button class="btn-copy" onclick="copyAccount('000-0000-0000-00')">복사</button>
+                </div>
+                <div class="account-item">
+                    <p><strong>신랑 父</strong> OOO</p>
+                    <p>OO은행 000-0000-0000-00</p>
+                    <button class="btn-copy" onclick="copyAccount('000-0000-0000-00')">복사</button>
+                </div>
+            </div>
+
+            <div class="account-box">
+                <h3>신부측</h3>
+                <div class="account-item">
+                    <p><strong>신부</strong> OOO</p>
+                    <p>OO은행 000-0000-0000-00</p>
+                    <button class="btn-copy" onclick="copyAccount('000-0000-0000-00')">복사</button>
+                </div>
+                <div class="account-item">
+                    <p><strong>신부 父</strong> OOO</p>
+                    <p>OO은행 000-0000-0000-00</p>
+                    <button class="btn-copy" onclick="copyAccount('000-0000-0000-00')">복사</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 방명록 -->
+    <section class="guestbook">
+        <div class="container">
+            <h2>방명록</h2>
+            <p class="guestbook-desc">축하의 메시지를 남겨주세요</p>
+
+            <div class="guestbook-form">
+                <input type="text" id="guest-name" placeholder="이름" maxlength="20">
+                <textarea id="guest-message" placeholder="축하 메시지를 입력해주세요" maxlength="200"></textarea>
+                <button onclick="submitGuestbook()" class="btn btn-primary">작성하기</button>
+            </div>
+
+            <div id="guestbook-list" class="guestbook-list">
+                <!-- 방명록 목록이 여기에 표시됩니다 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 공유하기 -->
+    <section class="share">
+        <div class="container">
+            <h2>초대장 공유하기</h2>
+            <div class="share-buttons">
+                <button onclick="shareKakao()" class="btn btn-kakao">카카오톡 공유</button>
+                <button onclick="copyUrl()" class="btn btn-link">링크 복사</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <p>Thank you for celebrating with us!</p>
+            <p class="copyright">© 2025 Wedding Invitation</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
