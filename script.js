@@ -74,7 +74,7 @@ function shareKakao() {
             content: {
                 title: '최혜환 ♥ 박희진 결혼합니다',
                 description: '2026년 9월 19일 (토) 오후 1시',
-                imageUrl: 'https://your-image-url.com/main.jpg',
+                imageUrl: 'https://hyehwanchoi.github.io/wedding-invitation/images/main.jpg',
                 link: {
                     mobileWebUrl: window.location.href,
                     webUrl: window.location.href,
