@@ -67,13 +67,13 @@ function fallbackCopy(text) {
 
 // ==================== 카카오톡 공유 ====================
 function shareKakao() {
-    // 카카오톡 SDK가 로드되어 있다면 공유 기능 사용
-    if (typeof Kakao !== 'undefined') {
+    // 카카오톡 SDK가 로드되어 있는지 확인
+    if (typeof Kakao !== 'undefined' && Kakao.isInitialized()) {
         Kakao.Share.sendDefault({
             objectType: 'feed',
             content: {
-                title: '최혜환 ♥ 박희진 결혼합니다',
-                description: '2026년 9월 19일 (토) 오후 1시',
+                title: '💍 최혜환 ♥ 박희진 결혼합니다',
+                description: '2026년 9월 19일 (토) 오후 1시\n저희 두 사람의 소중한 순간에 함께해주세요',
                 imageUrl: 'https://hyehwanchoi.github.io/wedding-invitation/images/main.jpg',
                 link: {
                     mobileWebUrl: window.location.href,
@@ -82,7 +82,7 @@ function shareKakao() {
             },
             buttons: [
                 {
-                    title: '청첩장 보기',
+                    title: '모바일 청첩장 보기',
                     link: {
                         mobileWebUrl: window.location.href,
                         webUrl: window.location.href,
@@ -92,12 +92,15 @@ function shareKakao() {
         });
     } else {
         // 카카오톡 SDK가 없으면 URL 공유
-        const message = '최혜환 ♥ 박희진 결혼합니다\n2026년 9월 19일 (토) 오후 1시\n\n' + window.location.href;
+        const message = '💍 최혜환 ♥ 박희진 결혼합니다\n2026년 9월 19일 (토) 오후 1시\n\n' + window.location.href;
         if (navigator.share) {
             navigator.share({
                 title: '최혜환 ♥ 박희진 결혼식 초대장',
                 text: message,
                 url: window.location.href
+            }).catch(err => {
+                console.log('공유 취소:', err);
+                copyUrl();
             });
         } else {
             copyUrl();
