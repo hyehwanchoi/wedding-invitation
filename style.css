@@ -144,12 +144,19 @@ section h3 {
     font-size: 14px;
     transition: all 0.3s;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
 }
 
 .btn:hover {
     background-color: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
+}
+
+.btn:active {
+    transform: scale(0.95);
 }
 
 .btn-primary {

@@ -24,6 +24,26 @@ function updateDday() {
 document.addEventListener('DOMContentLoaded', function() {
     updateDday();
     loadGuestbook();
+
+    // 공유 버튼 이벤트 리스너 추가
+    const kakaoBtn = document.getElementById('kakao-share-btn');
+    const urlBtn = document.getElementById('url-copy-btn');
+
+    if (kakaoBtn) {
+        kakaoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('카카오톡 공유 버튼 클릭됨');
+            shareKakao();
+        });
+    }
+
+    if (urlBtn) {
+        urlBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('링크 복사 버튼 클릭됨');
+            copyUrl();
+        });
+    }
 });
 
 // ==================== 계좌번호 복사 ====================
@@ -67,44 +87,75 @@ function fallbackCopy(text) {
 
 // ==================== 카카오톡 공유 ====================
 function shareKakao() {
+    console.log('shareKakao 함수 실행됨');
+    console.log('Kakao 객체:', typeof Kakao);
+
     // 카카오톡 SDK가 로드되어 있는지 확인
-    if (typeof Kakao !== 'undefined' && Kakao.isInitialized()) {
-        Kakao.Share.sendDefault({
-            objectType: 'feed',
-            content: {
-                title: '💍 최혜환 ♥ 박희진 결혼합니다',
-                description: '2026년 9월 19일 (토) 오후 1시\n저희 두 사람의 소중한 순간에 함께해주세요',
-                imageUrl: 'https://hyehwanchoi.github.io/wedding-invitation/images/main.jpg',
-                link: {
-                    mobileWebUrl: window.location.href,
-                    webUrl: window.location.href,
-                },
-            },
-            buttons: [
-                {
-                    title: '모바일 청첩장 보기',
+    if (typeof Kakao !== 'undefined') {
+        console.log('Kakao 초기화 상태:', Kakao.isInitialized());
+
+        if (!Kakao.isInitialized()) {
+            alert('카카오톡 SDK 초기화 실패. 페이지를 새로고침해주세요.');
+            return;
+        }
+
+        try {
+            // 공유할 URL 설정 (GitHub Pages URL 사용)
+            const shareUrl = 'https://hyehwanchoi.github.io/wedding-invitation/';
+            console.log('공유 URL:', shareUrl);
+
+            Kakao.Share.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '💍 최혜환 ♥ 박희진 결혼합니다',
+                    description: '2026년 9월 19일 (토) 오후 1시\n저희 두 사람의 소중한 순간에 함께해주세요',
+                    imageUrl: 'https://hyehwanchoi.github.io/wedding-invitation/images/main.jpg',
                     link: {
-                        mobileWebUrl: window.location.href,
-                        webUrl: window.location.href,
+                        mobileWebUrl: shareUrl,
+                        webUrl: shareUrl,
                     },
                 },
-            ],
+                buttons: [
+                    {
+                        title: '모바일 청첩장 보기',
+                        link: {
+                            mobileWebUrl: shareUrl,
+                            webUrl: shareUrl,
+                        },
+                    },
+                ],
+            });
+            console.log('카카오톡 공유 창 열림');
+        } catch (error) {
+            console.error('카카오톡 공유 오류:', error);
+            alert('카카오톡 공유 오류: ' + error.message);
+            // 오류 발생 시 대체 공유 방법 사용
+            fallbackShare();
+        }
+    } else {
+        console.log('Kakao SDK 없음, 대체 공유 방법 사용');
+        fallbackShare();
+    }
+}
+
+// 대체 공유 방법
+function fallbackShare() {
+    const message = '💍 최혜환 ♥ 박희진 결혼합니다\n2026년 9월 19일 (토) 오후 1시\n\n' + window.location.href;
+
+    if (navigator.share) {
+        navigator.share({
+            title: '최혜환 ♥ 박희진 결혼식 초대장',
+            text: message,
+            url: window.location.href
+        }).then(() => {
+            console.log('공유 성공');
+        }).catch(err => {
+            console.log('공유 취소 또는 실패:', err);
+            copyUrl();
         });
     } else {
-        // 카카오톡 SDK가 없으면 URL 공유
-        const message = '💍 최혜환 ♥ 박희진 결혼합니다\n2026년 9월 19일 (토) 오후 1시\n\n' + window.location.href;
-        if (navigator.share) {
-            navigator.share({
-                title: '최혜환 ♥ 박희진 결혼식 초대장',
-                text: message,
-                url: window.location.href
-            }).catch(err => {
-                console.log('공유 취소:', err);
-                copyUrl();
-            });
-        } else {
-            copyUrl();
-        }
+        console.log('navigator.share 지원 안 함, URL 복사');
+        copyUrl();
     }
 }
 
