@@ -206,12 +206,28 @@ section h3 {
     color: white;
     border-radius: 10px;
     font-size: 18px;
+    margin-bottom: 30px;
 }
 
 #dday-count {
     font-size: 24px;
     font-weight: bold;
     margin-left: 10px;
+}
+
+/* 캘린더 버튼 */
+.calendar-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+@media (min-width: 480px) {
+    .calendar-buttons {
+        flex-direction: row;
+    }
 }
 
 /* 갤러리 */

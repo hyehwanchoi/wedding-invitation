@@ -332,4 +332,57 @@ if (typeof kakao !== 'undefined' && kakao.maps) {
 }
 */
 
+// ==================== 캘린더에 일정 추가 ====================
+function addToGoogleCalendar() {
+    // 결혼식 정보
+    const eventTitle = '최혜환 ♥ 박희진 결혼식';
+    const eventLocation = 'OO웨딩홀 OO층 OO홀, 서울특별시 OO구 OO동 000-00';
+    const eventDetails = '최혜환과 박희진의 결혼식에 초대합니다.\n\n초대장: https://hyehwanchoi.github.io/wedding-invitation/';
+
+    // 날짜/시간 설정 (2026년 9월 19일 오후 1시 ~ 3시)
+    const startDate = '20260919T130000'; // 2026-09-19 13:00
+    const endDate = '20260919T150000';   // 2026-09-19 15:00
+
+    // 구글 캘린더 URL 생성
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(eventDetails)}&location=${encodeURIComponent(eventLocation)}`;
+
+    // 새 창에서 구글 캘린더 열기
+    window.open(googleCalendarUrl, '_blank');
+}
+
+function addToAppleCalendar() {
+    // .ics 파일 생성
+    const eventTitle = '최혜환 ♥ 박희진 결혼식';
+    const eventLocation = 'OO웨딩홀 OO층 OO홀, 서울특별시 OO구 OO동 000-00';
+    const eventDetails = '최혜환과 박희진의 결혼식에 초대합니다.\\n\\n초대장: https://hyehwanchoi.github.io/wedding-invitation/';
+
+    // 날짜/시간 설정 (UTC 형식)
+    const startDate = '20260919T040000Z'; // 2026-09-19 13:00 KST = 04:00 UTC
+    const endDate = '20260919T060000Z';   // 2026-09-19 15:00 KST = 06:00 UTC
+
+    // .ics 파일 내용
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Wedding Invitation//KR
+BEGIN:VEVENT
+DTSTART:${startDate}
+DTEND:${endDate}
+SUMMARY:${eventTitle}
+DESCRIPTION:${eventDetails}
+LOCATION:${eventLocation}
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR`;
+
+    // Blob 생성 및 다운로드
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = '최혜환_박희진_결혼식.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 console.log('Wedding Invitation Script Loaded ✨');
