@@ -1,6 +1,6 @@
 // ==================== 설정 ====================
 // 결혼식 날짜 설정 (YYYY, MM-1, DD)
-const weddingDate = new Date(2026, 8, 19); // 2026년 9월 19일 (월은 0부터 시작)
+const weddingDate = new Date(2026, 4, 31); // 2026년 5월 31일 (월은 0부터 시작)
 
 // ==================== D-Day 계산 ====================
 function updateDday() {
@@ -23,7 +23,6 @@ function updateDday() {
 // 페이지 로드 시 D-Day 업데이트
 document.addEventListener('DOMContentLoaded', function() {
     updateDday();
-    loadGuestbook();
 
     // 공유 버튼 이벤트 리스너 추가
     const kakaoBtn = document.getElementById('kakao-share-btn');
@@ -108,7 +107,7 @@ function shareKakao() {
                 objectType: 'feed',
                 content: {
                     title: '💍 최혜환 ♥ 박희진 결혼합니다',
-                    description: '2026년 9월 19일 (토) 오후 1시\n저희 두 사람의 소중한 순간에 함께해주세요',
+                    description: '2026년 5월 31일 (토) 오전 11시 30분\n저희 두 사람의 소중한 순간에 함께해주세요',
                     imageUrl: 'https://hyehwanchoi.github.io/wedding-invitation/images/main.jpg',
                     link: {
                         mobileWebUrl: shareUrl,
@@ -140,7 +139,7 @@ function shareKakao() {
 
 // 대체 공유 방법
 function fallbackShare() {
-    const message = '💍 최혜환 ♥ 박희진 결혼합니다\n2026년 9월 19일 (토) 오후 1시\n\n' + window.location.href;
+    const message = '💍 최혜환 ♥ 박희진 결혼합니다\n2026년 5월 31일 (토) 오전 11시 30분\n\n' + window.location.href;
 
     if (navigator.share) {
         navigator.share({
@@ -175,80 +174,6 @@ function copyUrl() {
     } else {
         fallbackCopy(url);
     }
-}
-
-// ==================== 방명록 ====================
-// LocalStorage를 사용한 간단한 방명록 (실제로는 서버가 필요함)
-function submitGuestbook() {
-    const nameInput = document.getElementById('guest-name');
-    const messageInput = document.getElementById('guest-message');
-
-    const name = nameInput.value.trim();
-    const message = messageInput.value.trim();
-
-    if (!name) {
-        alert('이름을 입력해주세요.');
-        return;
-    }
-
-    if (!message) {
-        alert('메시지를 입력해주세요.');
-        return;
-    }
-
-    // 방명록 데이터 생성
-    const guestbookEntry = {
-        id: Date.now(),
-        name: name,
-        message: message,
-        date: new Date().toLocaleDateString('ko-KR')
-    };
-
-    // LocalStorage에 저장
-    let guestbook = JSON.parse(localStorage.getItem('guestbook') || '[]');
-    guestbook.unshift(guestbookEntry); // 최신순으로 추가
-    localStorage.setItem('guestbook', JSON.stringify(guestbook));
-
-    // 입력 필드 초기화
-    nameInput.value = '';
-    messageInput.value = '';
-
-    // 방명록 다시 로드
-    loadGuestbook();
-
-    alert('축하 메시지가 등록되었습니다!\n감사합니다 😊');
-}
-
-function loadGuestbook() {
-    const guestbookList = document.getElementById('guestbook-list');
-    if (!guestbookList) return;
-
-    const guestbook = JSON.parse(localStorage.getItem('guestbook') || '[]');
-
-    if (guestbook.length === 0) {
-        guestbookList.innerHTML = '<p style="color: #999; padding: 40px 0;">아직 작성된 메시지가 없습니다.<br>첫 번째 축하 메시지를 남겨주세요!</p>';
-        return;
-    }
-
-    guestbookList.innerHTML = guestbook.map(entry => `
-        <div class="guestbook-item">
-            <div class="name">${escapeHtml(entry.name)}</div>
-            <div class="message">${escapeHtml(entry.message).replace(/\n/g, '<br>')}</div>
-            <div class="date">${entry.date}</div>
-        </div>
-    `).join('');
-}
-
-// HTML 이스케이프 함수 (XSS 방지)
-function escapeHtml(text) {
-    const map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-    };
-    return text.replace(/[&<>"']/g, m => map[m]);
 }
 
 // ==================== 갤러리 모달 ====================
@@ -306,19 +231,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ==================== 카카오맵 연동 (선택사항) ====================
-// 카카오맵 API 키가 있다면 아래 주석을 해제하고 사용하세요
-/*
+// ==================== 카카오맵 연동 ====================
 function initMap() {
     const container = document.getElementById('map');
     const options = {
-        center: new kakao.maps.LatLng(37.5665, 126.9780), // 좌표를 실제 장소로 변경
+        center: new kakao.maps.LatLng(37.5836, 127.0589), // 서울시립대 자작마루 좌표
         level: 3
     };
 
     const map = new kakao.maps.Map(container, options);
 
-    const markerPosition = new kakao.maps.LatLng(37.5665, 126.9780);
+    const markerPosition = new kakao.maps.LatLng(37.5836, 127.0589);
     const marker = new kakao.maps.Marker({
         position: markerPosition
     });
@@ -330,18 +253,17 @@ function initMap() {
 if (typeof kakao !== 'undefined' && kakao.maps) {
     kakao.maps.load(initMap);
 }
-*/
 
 // ==================== 캘린더에 일정 추가 ====================
 function addToGoogleCalendar() {
     // 결혼식 정보
     const eventTitle = '최혜환 ♥ 박희진 결혼식';
-    const eventLocation = 'OO웨딩홀 OO층 OO홀, 서울특별시 OO구 OO동 000-00';
+    const eventLocation = '서울시립대 자작마루, 서울특별시 동대문구 서울시립대로 163';
     const eventDetails = '최혜환과 박희진의 결혼식에 초대합니다.\n\n초대장: https://hyehwanchoi.github.io/wedding-invitation/';
 
-    // 날짜/시간 설정 (2026년 9월 19일 오후 1시 ~ 3시)
-    const startDate = '20260919T130000'; // 2026-09-19 13:00
-    const endDate = '20260919T150000';   // 2026-09-19 15:00
+    // 날짜/시간 설정 (2026년 5월 31일 오전 11시 30분 ~ 오후 1시 30분)
+    const startDate = '20260531T113000'; // 2026-05-31 11:30
+    const endDate = '20260531T133000';   // 2026-05-31 13:30
 
     // 구글 캘린더 URL 생성
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(eventDetails)}&location=${encodeURIComponent(eventLocation)}`;
@@ -353,12 +275,12 @@ function addToGoogleCalendar() {
 function addToAppleCalendar() {
     // .ics 파일 생성
     const eventTitle = '최혜환 ♥ 박희진 결혼식';
-    const eventLocation = 'OO웨딩홀 OO층 OO홀, 서울특별시 OO구 OO동 000-00';
+    const eventLocation = '서울시립대 자작마루, 서울특별시 동대문구 서울시립대로 163';
     const eventDetails = '최혜환과 박희진의 결혼식에 초대합니다.\\n\\n초대장: https://hyehwanchoi.github.io/wedding-invitation/';
 
     // 날짜/시간 설정 (UTC 형식)
-    const startDate = '20260919T040000Z'; // 2026-09-19 13:00 KST = 04:00 UTC
-    const endDate = '20260919T060000Z';   // 2026-09-19 15:00 KST = 06:00 UTC
+    const startDate = '20260531T023000Z'; // 2026-05-31 11:30 KST = 02:30 UTC
+    const endDate = '20260531T043000Z';   // 2026-05-31 13:30 KST = 04:30 UTC
 
     // .ics 파일 내용
     const icsContent = `BEGIN:VCALENDAR
@@ -384,5 +306,47 @@ END:VCALENDAR`;
     link.click();
     document.body.removeChild(link);
 }
+
+// ==================== 배경음악 ====================
+document.addEventListener('DOMContentLoaded', function() {
+    const bgm = document.getElementById('bgm');
+    const musicToggle = document.getElementById('music-toggle');
+    const musicIcon = document.getElementById('music-icon');
+    let isPlaying = false;
+
+    // 음악 재생/정지 토글
+    function toggleMusic() {
+        if (isPlaying) {
+            bgm.pause();
+            musicIcon.textContent = '🔇';
+            musicToggle.classList.remove('playing');
+            isPlaying = false;
+        } else {
+            // 브라우저 정책상 사용자 인터랙션 후에만 재생 가능
+            bgm.play().then(() => {
+                musicIcon.textContent = '🔊';
+                musicToggle.classList.add('playing');
+                isPlaying = true;
+            }).catch(error => {
+                console.log('음악 재생 실패:', error);
+                alert('배경음악을 재생할 수 없습니다.\n브라우저 설정을 확인해주세요.');
+            });
+        }
+    }
+
+    // 버튼 클릭 이벤트
+    if (musicToggle) {
+        musicToggle.addEventListener('click', toggleMusic);
+    }
+
+    // 페이지 로드 시 자동 재생 시도 (선택사항)
+    // 대부분의 브라우저에서는 사용자 인터랙션 없이는 재생되지 않음
+    // 자동재생을 원하면 아래 주석 해제
+    /*
+    setTimeout(() => {
+        toggleMusic();
+    }, 1000);
+    */
+});
 
 console.log('Wedding Invitation Script Loaded ✨');

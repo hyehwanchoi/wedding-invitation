@@ -10,17 +10,20 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hyehwanchoi.github.io/wedding-invitation/">
     <meta property="og:title" content="최혜환 ♥ 박희진 결혼식 초대장">
-    <meta property="og:description" content="2026년 9월 19일 (토) 오후 1시">
+    <meta property="og:description" content="2026년 5월 31일 (토) 오전 11시 30분">
     <meta property="og:image" content="https://hyehwanchoi.github.io/wedding-invitation/images/main.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://hyehwanchoi.github.io/wedding-invitation/">
     <meta property="twitter:title" content="최혜환 ♥ 박희진 결혼식 초대장">
-    <meta property="twitter:description" content="2026년 9월 19일 (토) 오후 1시">
+    <meta property="twitter:description" content="2026년 5월 31일 (토) 오전 11시 30분">
     <meta property="twitter:image" content="https://hyehwanchoi.github.io/wedding-invitation/images/main.jpg">
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- 카카오맵 SDK -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=21f9f018bd39b4c6f6e1ae0162dc6095"></script>
 
     <!-- 카카오톡 SDK -->
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"></script>
@@ -77,9 +80,9 @@
         <div class="container">
             <h2>예식 일시 및 장소</h2>
             <div class="info-box">
-                <p class="date">2026년 9월 19일 (토) 오후 1시</p>
-                <p class="location">OO웨딩홀 OO층 OO홀</p>
-                <p class="address">서울특별시 OO구 OO동 000-00</p>
+                <p class="date">2026년 5월 31일 (토) 오전 11시 30분</p>
+                <p class="location">서울시립대 자작마루</p>
+                <p class="address">서울특별시 동대문구 서울시립대로 163</p>
             </div>
 
             <!-- D-Day 카운터 -->
@@ -145,7 +148,7 @@
                 <p>건물 내 주차 가능 (2시간 무료)</p>
             </div>
 
-            <a href="https://map.kakao.com/" target="_blank" class="btn btn-primary">카카오맵으로 보기</a>
+            <a href="https://map.kakao.com/link/map/서울시립대 자작마루,37.5836,127.0589" target="_blank" class="btn btn-primary">카카오맵으로 보기</a>
         </div>
     </section>
 
@@ -159,8 +162,8 @@
                 <h3>신랑</h3>
                 <div class="account-item">
                     <p><strong>최혜환</strong></p>
-                    <p>OO은행 000-0000-0000-00</p>
-                    <button class="btn-copy" onclick="copyAccount('000-0000-0000-00')">복사</button>
+                    <p>국민은행 293802-01-211625</p>
+                    <button class="btn-copy" onclick="copyAccount('293802-01-211625')">복사</button>
                 </div>
             </div>
 
@@ -171,24 +174,6 @@
                     <p>OO은행 000-0000-0000-00</p>
                     <button class="btn-copy" onclick="copyAccount('000-0000-0000-00')">복사</button>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 방명록 -->
-    <section class="guestbook">
-        <div class="container">
-            <h2>방명록</h2>
-            <p class="guestbook-desc">축하의 메시지를 남겨주세요</p>
-
-            <div class="guestbook-form">
-                <input type="text" id="guest-name" placeholder="이름" maxlength="20">
-                <textarea id="guest-message" placeholder="축하 메시지를 입력해주세요" maxlength="200"></textarea>
-                <button onclick="submitGuestbook()" class="btn btn-primary">작성하기</button>
-            </div>
-
-            <div id="guestbook-list" class="guestbook-list">
-                <!-- 방명록 목록이 여기에 표시됩니다 -->
             </div>
         </div>
     </section>
@@ -211,6 +196,17 @@
             <p class="copyright">© 2026 Wedding Invitation</p>
         </div>
     </footer>
+
+    <!-- 배경음악 -->
+    <audio id="bgm" loop>
+        <source src="music/bgm.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- 음악 컨트롤 버튼 (플로팅) -->
+    <button id="music-toggle" class="music-btn" aria-label="배경음악 재생/정지">
+        <span id="music-icon">🔇</span>
+    </button>
 
     <!-- 이미지 모달 -->
     <div id="image-modal" class="modal">
